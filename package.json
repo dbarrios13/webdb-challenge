@@ -1,0 +1,24 @@
+{
+  "name": "webdb-challenge",
+  "version": "1.0.0",
+  "description": "This challenge allows you to practice the concepts and techniques learned over the past Sprint and apply them in a concrete project.",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbarrios13/webdb-challenge.git"
+  },
+  "author": "David Barrios",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "knex": "^0.17.6",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
