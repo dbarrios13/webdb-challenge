@@ -1,10 +1,6 @@
-const knex = require('knex')
-
-const config = require('../knexfile')
 const mappers = require('./mappers');
 
-
-const db = knex(config.development)
+const db = require('../data/dbConfig.js')
 
 module.exports = {
     find,
@@ -13,12 +9,12 @@ module.exports = {
     remove
 }
 
-const data = db('projects')
-
 function find(id) {
-    data.where('projects.id', id).first();
+    let data = db('projects')
 
     if (id) {
+        data.where('projects.id', id).first();
+
         const promises = [data, getProjectActions(id)];
 
         return Promise.all(promises).then(function (results) {
@@ -40,27 +36,24 @@ function find(id) {
 }
 
 function add(project) {
-    return data
+    return db('projects')
         .insert(project)
-        .then(ids => {
-            const [id] = ids
-            return find(id)
-        })
+        .then(([id]) => {find(id)})
 }
 
 function update(id, changes) {
-    return data
+    return db('projects')
         .where({ id })
         .update(changes)
         .then(() => {
-            return db(data)
+            return db('projects')
                 .where({ id })
                 .first()
         })
 }
 
 function remove(id) {
-    return data
+    return db('projects')
         .where({ id })
         .del()
 }

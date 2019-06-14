@@ -8,15 +8,18 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .unique()
       tbl
-        .text('description')
+        .string('description', 128)
+        .notNullable()
       tbl
         .text('notes')
+        .notNullable()
       tbl
         .boolean('completed')
         .defaultTo(false)
       tbl
         .integer('project_id')
         .unsigned()
+        .notNullable()
         .references('id')
         .inTable('projects')
         .onDelete('RESTRICT')

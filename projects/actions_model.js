@@ -1,33 +1,27 @@
-const knex = require('knex')
-
 const mappers = require('./mappers');
 
-const config = require('../knexfile')
-
-const db = knex(config.development)
+const db = require('../data/dbConfig.js')
 
 module.exports = {
     find,
     add
 }
 
-const data = 'actions'
-
 function find(id) {
     if(id) {
-        return db(data)
+        return db('actions')
             .where('id', id)
             .first()
             .then(action => mappers.actionToBody(action))
     }
 
-    return db(data).then(actions => {
+    return db('actions').then(actions => {
         return actions.map(action => mappers.actionToBody(action))
     })
 }
 
 function add (action) {
-    return db(data)
+    return db('actions')
         .insert(action)
-        .then(([id]) => find(id))
+        .then(([id]) => this.find(id))
 }

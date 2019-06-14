@@ -1,7 +1,6 @@
 const db = require('./projects_model.js')
 const actionDB = require('./actions_model.js')
 
-
 const router = require('express').Router()
 
 router.get('/:id', async(req, res) => {
@@ -35,7 +34,7 @@ router.post('/', async(req, res) => {
 router.post('/:id/actions', async(req, res) => {
     const actionInfo = {...req.body, project_id: req.params.id}
     try {  
-        const action = await actionDB.add(actionInfo)
+        const action = await actionDB.insert(actionInfo)
         res.status(201).json(action)
     } catch (error) {
         res.status(500).json({

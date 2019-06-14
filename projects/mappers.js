@@ -1,7 +1,12 @@
 module.exports = {
   projectToBody,
   actionToBody,
+  intToBoolean
 };
+
+function intToBoolean(int) {
+  return int === 1 ? true : false;
+}
 
 function projectToBody(project) {
   const result = {
